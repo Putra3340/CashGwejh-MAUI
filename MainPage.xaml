@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CashGwejh.MainPage"
+             BackgroundColor="#F6F7FB">
+
+    <!-- Root layout: only ONE Content -->
+    <AbsoluteLayout>
+
+        <!-- Main Scrollable Content -->
+        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout Spacing="20" Padding="20">
+
+                <Label Text="Welcome back, Putra3340"
+                       FontSize="26"
+                       FontAttributes="Bold"
+                       TextColor="#2B2D42" />
+
+                <Grid ColumnSpacing="12" RowSpacing="12" x:Name="Data_Stats">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Grid.Row="0" Grid.Column="0" CornerRadius="16" HasShadow="True" BackgroundColor="White">
+                        <VerticalStackLayout>
+                            <Label Text="Bank" FontSize="14" TextColor="#8D99AE" />
+                            <Label Text="{Binding F_BankAmount}" FontSize="20" FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Grid.Row="0" Grid.Column="1" CornerRadius="16" HasShadow="True" BackgroundColor="White">
+                        <VerticalStackLayout>
+                            <Label Text="Cash" FontSize="14" TextColor="#8D99AE" />
+                            <Label Text="{Binding F_CashAmount}" FontSize="20" FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="0" CornerRadius="16" HasShadow="True" BackgroundColor="White">
+                        <VerticalStackLayout>
+                            <Label Text="External Bank" FontSize="14" TextColor="#8D99AE" />
+                            <Label Text="{Binding F_ExternalBankAmount}" FontSize="20" FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Grid.Row="1" Grid.Column="1" CornerRadius="16" HasShadow="True" BackgroundColor="White">
+                        <VerticalStackLayout>
+                            <Label Text="E-Wallet" FontSize="14" TextColor="#8D99AE" />
+                            <Label Text="{Binding F_EWalletAmount}" FontSize="20" FontAttributes="Bold" x:Name="Lbl_EWallet"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Grid.Row="2" Grid.Column="0" CornerRadius="16" HasShadow="True" BackgroundColor="#FFF1F2">
+                        <VerticalStackLayout>
+                            <Label Text="Debt" FontSize="14" TextColor="#B00020" />
+                            <Label Text="{Binding F_DebtAmount}" FontSize="20" FontAttributes="Bold" TextColor="#B00020"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Grid.Row="2" Grid.Column="2" CornerRadius="16" HasShadow="True" BackgroundColor="#EDF7ED">
+                        <VerticalStackLayout>
+                            <Label Text="Total" FontSize="14" TextColor="#2E7D32" />
+                            <Label Text="{Binding F_TotalAmount}" FontSize="20" FontAttributes="Bold" TextColor="#2E7D32"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+
+                <Frame CornerRadius="18" HasShadow="True" BackgroundColor="White">
+                    <VerticalStackLayout>
+                        <Label Text="Saving Milestone" FontAttributes="Bold" FontSize="18" />
+                        <ProgressBar Progress="0.65" HeightRequest="10" />
+                        <Label Text="65% towards Rp 20,000,000" FontSize="13" TextColor="#8D99AE" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Label Text="Recent Transactions" FontSize="20" FontAttributes="Bold" />
+
+                <Frame CornerRadius="16" HasShadow="True" BackgroundColor="White">
+                    <CollectionView x:Name="Data_Trx" SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <VerticalStackLayout Spacing="12">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding F_Account}" FontAttributes="Bold" />
+                                            <Label FontSize="12" TextColor="#8D99AE" Text="{Binding F_Notes}"/>
+
+                                            <Label Text="{Binding F_CreatedAt}" FontSize="12" TextColor="#8D99AE"/>
+                                        </VerticalStackLayout>
+
+                                        <Label Grid.Column="1" Text="{Binding F_Amount}" />
+                                    </Grid>
+
+                                    <BoxView HeightRequest="1" BackgroundColor="#EEEEEE" />
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Frame>
+
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Floating Action Button -->
+        <Button Text="+"
+                WidthRequest="56"
+                HeightRequest="56"
+                CornerRadius="28"
+                BackgroundColor="#6C63FF"
+                TextColor="White"
+                FontSize="22"
+                AbsoluteLayout.LayoutBounds="1,1,56,56"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                Margin="0,0,20,20" Clicked="FloatingButton_Clicked"/>
+
+    </AbsoluteLayout>
+</ContentPage>

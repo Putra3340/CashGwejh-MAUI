@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CashGwejh.Page.ManagePage"
+             Title="Add Transaction"
+             BackgroundColor="#F6F7FB">
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="18">
+            <!-- Amount -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout>
+                    <Label Text="Amount"/>
+                    <Entry Text="{Binding Amount}"
+                           Keyboard="Numeric"
+                           Placeholder="0"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Currency -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout>
+                    <Label Text="Currency"/>
+                    <Picker ItemsSource="{Binding Currencies}"
+                            SelectedItem="{Binding SelectedCurrency}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Type -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout>
+                    <Label Text="Transaction Type"/>
+                    <Picker ItemsSource="{Binding TransactionTypes}"
+                            SelectedItem="{Binding SelectedTransactionType}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Category -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout>
+                    <Label Text="Category"/>
+                    <Picker ItemsSource="{Binding Categories}"
+                            SelectedItem="{Binding SelectedCategory}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Account -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout>
+                    <Label Text="Account"/>
+                    <Picker ItemsSource="{Binding AccountTypes}"
+                            SelectedItem="{Binding SelectedAccountType}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Notes -->
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout>
+                    <Label Text="Notes"/>
+                    <Entry Text="{Binding Notes}"
+                           Placeholder="Optional"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button Text="Save Transaction"
+                    BackgroundColor="#4F46E5"
+                    TextColor="White"
+                    CornerRadius="14" Clicked="SaveTransaction_Clicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
