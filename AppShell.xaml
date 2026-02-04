@@ -4,11 +4,15 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:CashGwejh"
+    xmlns:page="clr-namespace:CashGwejh.Page"
     Title="CashGwejh">
 
     <ShellContent
-        Title="Home"
+        Title="CashGwejh"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
-
+    <ShellContent
+        Title="Settings"
+        ContentTemplate="{DataTemplate page:SettingsPage}"
+        Route="SettingsPage" />
 </Shell>

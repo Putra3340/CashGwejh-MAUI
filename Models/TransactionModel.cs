@@ -23,9 +23,10 @@ namespace CashGwejh.Models
         public Category SelectedCategory { get; set { field = value; OnPropertyChanged(); } }
         public AccountType SelectedAccountType { get; set { field = value; OnPropertyChanged(); } }
 
-        public decimal? Amount { get; set { field = value; OnPropertyChanged(); } }
-        public string? Notes { get; set { field = value; OnPropertyChanged(); } }
-        public DateTime CreatedAt { get; set { field = value; OnPropertyChanged(); } } = DateTime.Now;
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public decimal? Amount { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(F_Amount)); } }
+        public string? Notes { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(F_Notes)); } }
+        public DateTime CreatedAt { get; set { field = value; OnPropertyChanged(); OnPropertyChanged(nameof(F_CreatedAt)); } } = DateTime.Now;
 
         public string F_Account { get { return SelectedAccountType.ToString(); } }
         public string F_Amount { get { return Utils.CurrencyHelper.FormatCurrency(Amount ?? 0, "IDR"); } }

@@ -81,7 +81,7 @@
                 <Label Text="Recent Transactions" FontSize="20" FontAttributes="Bold" />
 
                 <Frame CornerRadius="16" HasShadow="True" BackgroundColor="White">
-                    <CollectionView x:Name="Data_Trx" SelectionMode="Single">
+                    <CollectionView x:Name="Data_Trx" SelectionMode="Single" SelectionChanged="Data_Trx_SelectionChanged">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <VerticalStackLayout Spacing="12">

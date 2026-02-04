@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CashGwejh.Page.SettingsPage"
+             Title="SettingsPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="24">
+
+            <!-- Appearance -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Appearance"
+                       FontSize="16"
+                       FontAttributes="Bold"/>
+
+                <Picker Title="Theme">
+                    <Picker.Items>
+                        <x:String>System</x:String>
+                        <x:String>Light</x:String>
+                        <x:String>Dark</x:String>
+                    </Picker.Items>
+                </Picker>
+            </VerticalStackLayout>
+
+            <!-- Currency -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Default Currency"
+                       FontSize="16"
+                       FontAttributes="Bold"/>
+
+                <Picker Title="Currency">
+                    <Picker.Items>
+                        <x:String>IDR</x:String>
+                        <x:String>USD</x:String>
+                        <x:String>EUR</x:String>
+                    </Picker.Items>
+                </Picker>
+            </VerticalStackLayout>
+
+            <!-- Notifications -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Notifications"
+                       FontSize="16"
+                       FontAttributes="Bold"/>
+
+                <HorizontalStackLayout>
+                    <Label Text="Enable notifications"
+                           VerticalOptions="Center"/>
+                    <Switch HorizontalOptions="EndAndExpand"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Data -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Data"
+                       FontSize="16"
+                       FontAttributes="Bold"/>
+
+                <Button Text="Clear All Transactions"
+                        TextColor="White"
+                        BackgroundColor="#D62828" Clicked="ClearTransaction_Clicked"/>
+            </VerticalStackLayout>
+
+            <!-- About -->
+            <VerticalStackLayout Spacing="6"
+                                 HorizontalOptions="Center">
+                <Label Text="CashGwejh"
+                       FontAttributes="Bold"/>
+                <Label Text="Version 1.0.0"
+                       FontSize="12"
+                       TextColor="Gray"/>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

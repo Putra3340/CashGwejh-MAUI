@@ -4,68 +4,91 @@
              x:Class="CashGwejh.Page.ManagePage"
              Title="Add Transaction"
              BackgroundColor="#F6F7FB">
-    <ScrollView>
-        <VerticalStackLayout Padding="16" Spacing="18">
-            <!-- Amount -->
-            <Frame Style="{StaticResource CardStyle}">
-                <VerticalStackLayout>
-                    <Label Text="Amount"/>
-                    <Entry Text="{Binding Amount}"
+    <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All">
+
+        <ScrollView
+        AbsoluteLayout.LayoutBounds="0,0,1,1"
+        AbsoluteLayout.LayoutFlags="All">
+            <VerticalStackLayout Padding="16" Spacing="18">
+                <!-- Amount -->
+                <Frame Style="{StaticResource CardStyle}">
+                    <VerticalStackLayout>
+                        <Label Text="Amount"/>
+                        <Entry Text="{Binding Amount}"
                            Keyboard="Numeric"
                            Placeholder="0"/>
-                </VerticalStackLayout>
-            </Frame>
+                    </VerticalStackLayout>
+                </Frame>
 
-            <!-- Currency -->
-            <Frame Style="{StaticResource CardStyle}">
-                <VerticalStackLayout>
-                    <Label Text="Currency"/>
-                    <Picker ItemsSource="{Binding Currencies}"
+                <!-- Currency -->
+                <Frame Style="{StaticResource CardStyle}">
+                    <VerticalStackLayout>
+                        <Label Text="Currency"/>
+                        <Picker ItemsSource="{Binding Currencies}"
                             SelectedItem="{Binding SelectedCurrency}" />
-                </VerticalStackLayout>
-            </Frame>
+                    </VerticalStackLayout>
+                </Frame>
 
-            <!-- Type -->
-            <Frame Style="{StaticResource CardStyle}">
-                <VerticalStackLayout>
-                    <Label Text="Transaction Type"/>
-                    <Picker ItemsSource="{Binding TransactionTypes}"
+                <!-- Type -->
+                <Frame Style="{StaticResource CardStyle}">
+                    <VerticalStackLayout>
+                        <Label Text="Transaction Type"/>
+                        <Picker ItemsSource="{Binding TransactionTypes}"
                             SelectedItem="{Binding SelectedTransactionType}" />
-                </VerticalStackLayout>
-            </Frame>
+                    </VerticalStackLayout>
+                </Frame>
 
-            <!-- Category -->
-            <Frame Style="{StaticResource CardStyle}">
-                <VerticalStackLayout>
-                    <Label Text="Category"/>
-                    <Picker ItemsSource="{Binding Categories}"
+                <!-- Category -->
+                <Frame Style="{StaticResource CardStyle}">
+                    <VerticalStackLayout>
+                        <Label Text="Category"/>
+                        <Picker ItemsSource="{Binding Categories}"
                             SelectedItem="{Binding SelectedCategory}" />
-                </VerticalStackLayout>
-            </Frame>
+                    </VerticalStackLayout>
+                </Frame>
 
-            <!-- Account -->
-            <Frame Style="{StaticResource CardStyle}">
-                <VerticalStackLayout>
-                    <Label Text="Account"/>
-                    <Picker ItemsSource="{Binding AccountTypes}"
+                <!-- Account -->
+                <Frame Style="{StaticResource CardStyle}">
+                    <VerticalStackLayout>
+                        <Label Text="Account"/>
+                        <Picker ItemsSource="{Binding AccountTypes}"
                             SelectedItem="{Binding SelectedAccountType}" />
-                </VerticalStackLayout>
-            </Frame>
+                    </VerticalStackLayout>
+                </Frame>
 
-            <!-- Notes -->
-            <Frame Style="{StaticResource CardStyle}">
-                <VerticalStackLayout>
-                    <Label Text="Notes"/>
-                    <Entry Text="{Binding Notes}"
+                <!-- Notes -->
+                <Frame Style="{StaticResource CardStyle}">
+                    <VerticalStackLayout>
+                        <Label Text="Notes"/>
+                        <Entry Text="{Binding Notes}"
                            Placeholder="Optional"/>
-                </VerticalStackLayout>
-            </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
+        <!-- Floating Action Button -->
+        <Button Text="+"
+                WidthRequest="56"
+                HeightRequest="56"
+                CornerRadius="28"
+                BackgroundColor="#6C63FF"
+                TextColor="White"
+                FontSize="22"
+                AbsoluteLayout.LayoutBounds="1,1,56,56"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                Margin="0,0,20,20" Clicked="SaveTransaction_Clicked"/>
+        <Button x:Name="Btn_Delete"
+                Text="-"
+                WidthRequest="56"
+                HeightRequest="56"
+                CornerRadius="28"
+                BackgroundColor="#6C63FF"
+                TextColor="White"
+                FontSize="22"
+                AbsoluteLayout.LayoutBounds="1,1,56,56"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                Margin="0,0,150,20" Clicked="FloatingButton_Clicked" IsVisible="False"/>
 
-            <Button Text="Save Transaction"
-                    BackgroundColor="#4F46E5"
-                    TextColor="White"
-                    CornerRadius="14" Clicked="SaveTransaction_Clicked"/>
-
-        </VerticalStackLayout>
-    </ScrollView>
+    </AbsoluteLayout>
 </ContentPage>

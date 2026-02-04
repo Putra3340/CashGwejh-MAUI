@@ -39,6 +39,18 @@ namespace CashGwejh.Utils
             foreach (var trx in loaded.OrderByDescending(x=>x.CreatedAt))
                 StaticBinding.TransactionsList.Add(trx);
         }
+        public static void ClearTransaction()
+        {
+            var path = Path.Combine(
+                FileSystem.AppDataDirectory,
+                "transactions.json"
+            );
+
+            if (!File.Exists(path)) return;
+            File.Delete(path);
+            StaticBinding.TransactionsList.Clear();
+
+        }
         public static void SaveSettings()
         {
             

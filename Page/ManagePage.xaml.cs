@@ -1,16 +1,22 @@
-using Android.Widget;
+﻿using Android.Widget;
 using CashGwejh.Models;
 using CashGwejh.Utils;
 namespace CashGwejh.Page;
 
+[QueryProperty(nameof(Transaction), "Transaction")]
 public partial class ManagePage : ContentPage
 {
+    public ManageTransactionViewModel Transaction
+    {
+        get => field;
+        set { if (value == null) return; field = value;BindingContext = value; IsUpdate = true;Btn_Delete.IsVisible = true; }
+    }
+    public bool IsUpdate = false;
     public ManagePage()
     {
         InitializeComponent();
         try
         {
-
             BindingContext = new ManageTransactionViewModel();
         }
         catch (Exception ex)
@@ -27,37 +33,68 @@ public partial class ManagePage : ContentPage
             return;
 
         btn.IsEnabled = false;
-        Dispatcher.Dispatch(() =>
+        var list = StaticBinding.TransactionsList;
+
+        if (!IsUpdate)
         {
-            var list = StaticBinding.TransactionsList;
-
-            // add new transaction
             list.Add(vm);
+        }
+        else
+        {
+            var existing = list.FirstOrDefault(x => x.Id == vm.Id);
+            if (existing != null)
+            {
+                existing.Amount = vm.Amount;
+                existing.SelectedCurrency = vm.SelectedCurrency;
+                existing.SelectedTransactionType = vm.SelectedTransactionType;
+                existing.SelectedCategory = vm.SelectedCategory;
+                existing.SelectedAccountType = vm.SelectedAccountType;
+                existing.Notes = vm.Notes;
+                existing.CreatedAt = vm.CreatedAt;
+            }
+        }
 
-            // reorder
-            var sorted = list
-                .OrderByDescending(x => x.CreatedAt)
-                .ToList();
+        var sorted = list
+            .OrderByDescending(x => x.CreatedAt)
+            .ToList();
 
-            // rebuild collection
-            list.Clear();
-            foreach (var item in sorted)
-                list.Add(item);
-        });
-
-        var amount = vm.Amount;
-        var currency = vm.SelectedCurrency;
-        var type = vm.SelectedTransactionType;
-        var category = vm.SelectedCategory;
-        var account = vm.SelectedAccountType;
-        var notes = vm.Notes;
+        for (int i = 0; i < sorted.Count; i++)
+        {
+            var oldIndex = list.IndexOf(sorted[i]);
+            if (oldIndex != i)
+                list.Move(oldIndex, i);
+        }
 
         Toast.MakeText(Android.App.Application.Context, "Transaction Saved", ToastLength.Short).Show();
+
         Dispatcher.Dispatch(async () =>
         {
             await SaveData.SaveTransaction();
             StaticBinding.HomeStats.SyncWithTransaction();
             btn.IsEnabled = true;
+            IsUpdate = false;
+            await Shell.Current.GoToAsync("..");
+        });
+    }
+
+    private void FloatingButton_Clicked(object sender, EventArgs e)
+    {
+        if (BindingContext is not ManageTransactionViewModel vm)
+            return;
+        if (sender is not Microsoft.Maui.Controls.Button btn)
+            return;
+
+        var list = StaticBinding.TransactionsList;
+        var existing = list.FirstOrDefault(x => x.Id == vm.Id);
+        list.Remove(existing);
+        Toast.MakeText(Android.App.Application.Context, "Transaction Deleted", ToastLength.Short).Show();
+
+        Dispatcher.Dispatch(async () =>
+        {
+            await SaveData.SaveTransaction();
+            StaticBinding.HomeStats.SyncWithTransaction();
+            btn.IsEnabled = true;
+            IsUpdate = false;
             await Shell.Current.GoToAsync("..");
         });
     }
