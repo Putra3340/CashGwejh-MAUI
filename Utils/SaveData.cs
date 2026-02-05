@@ -39,6 +39,28 @@ namespace CashGwejh.Utils
             foreach (var trx in loaded.OrderByDescending(x=>x.CreatedAt))
                 StaticBinding.TransactionsList.Add(trx);
         }
+        public static void SaveMilestone()
+        {
+            var path = Path.Combine(
+                FileSystem.AppDataDirectory,
+                "milestone.json"
+            );
+
+            var json = JsonSerializer.Serialize(StaticBinding.MilestoneStats);
+            File.WriteAllText(path, json);
+        }
+        public static void LoadMilestone()
+        {
+            var path = Path.Combine(
+                FileSystem.AppDataDirectory,
+                "milestone.json"
+            );
+
+            if (!File.Exists(path)) return;
+
+            var json = File.ReadAllText(path);
+            StaticBinding.MilestoneStats = JsonSerializer.Deserialize<HomeMilestoneModel>(json);
+        }
         public static void ClearTransaction()
         {
             var path = Path.Combine(

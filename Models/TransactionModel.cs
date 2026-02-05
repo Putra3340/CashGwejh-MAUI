@@ -1,13 +1,10 @@
-﻿using KotlinX.Serialization;
-using Microsoft.Maui.Controls;
+﻿using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics.Text;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
-using static Java.Util.Jar.Attributes;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace CashGwejh.Models
 {
@@ -32,6 +29,7 @@ namespace CashGwejh.Models
         public string F_Amount { get { return Utils.CurrencyHelper.FormatCurrency(Amount ?? 0, "IDR"); } }
         public string F_Notes { get { return Notes; } }
         public string F_CreatedAt { get { return CreatedAt.ToString("dd MMM yyyy HH:mm"); } }
+        public string StatusColor { get { return SelectedTransactionType == TransactionType.Income ? "#2E7D32" : "#B00020"; } set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string? name = null)

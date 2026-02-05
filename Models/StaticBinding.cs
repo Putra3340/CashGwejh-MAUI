@@ -8,6 +8,7 @@ namespace CashGwejh.Models
     public static class StaticBinding
     {
         public static HomeStatsModel HomeStats = new();
+        public static HomeMilestoneModel MilestoneStats = new();
 
         public static ObservableCollection<ManageTransactionViewModel> TransactionsList = new();
     }

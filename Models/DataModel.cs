@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CashGwejh.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -69,10 +70,31 @@ namespace CashGwejh.Models
         public event PropertyChangedEventHandler? PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string? name = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(string.Empty));
     }
-    public class HomeMilestoneModel
+    public class HomeMilestoneModel : INotifyPropertyChanged
     {
-        public string Name { get; set; }
-        public decimal? Target { get; set; }
-        public int? Percent { get; set; }
+        public string Name { get; set { field = value; OnPropertyChanged(); } } = "Milestone";
+        public decimal? Amount { get; set { field = value; OnPropertyChanged(); } } = 0;
+        public decimal? Target { get; set { field = value; OnPropertyChanged(); } } = 0;
+        public double? Percent { get { return (double)(Amount.Value / Target.Value); } set { field = value; OnPropertyChanged(); } }
+        public DateTime StartAt { get; set { field = value; OnPropertyChanged(); } } = DateTime.Now;
+
+        public string F_Description { get { return $"{Percent:P0} towards Rp {CurrencyHelper.FormatCurrency(Target ?? 0, "IDR")}"; } }
+        public event PropertyChangedEventHandler? PropertyChanged;
+        void OnPropertyChanged([CallerMemberName] string? name = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(string.Empty));
+        public void UpdateAmount()
+        {
+            decimal? amount = 0;
+            var trxlist = StaticBinding.TransactionsList.Where(x => x.CreatedAt >= StartAt).ToList();
+            foreach(var trx in trxlist)
+            {
+                if(trx.SelectedTransactionType == TransactionType.Expense)
+                {
+                    amount -= trx.Amount;
+                    continue;
+                }
+                amount += trx.Amount;
+            }
+            Amount = amount;
+        }
     }
 }

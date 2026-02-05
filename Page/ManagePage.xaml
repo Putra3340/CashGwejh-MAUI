@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CashGwejh.Page.ManagePage"
+             xmlns:vm="clr-namespace:CashGwejh.Models"
              Title="Add Transaction"
-             BackgroundColor="#F6F7FB">
+             BackgroundColor="#F6F7FB" x:DataType="vm:ManageTransactionViewModel">
     <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                 AbsoluteLayout.LayoutFlags="All">
 
@@ -22,7 +23,7 @@
                 </Frame>
 
                 <!-- Currency -->
-                <Frame Style="{StaticResource CardStyle}">
+                <Frame Style="{StaticResource CardStyle}" IsVisible="False">
                     <VerticalStackLayout>
                         <Label Text="Currency"/>
                         <Picker ItemsSource="{Binding Currencies}"

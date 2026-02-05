@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:CashGwejh.Models"
              x:Class="CashGwejh.MainPage"
              BackgroundColor="#F6F7FB">
 
@@ -17,7 +18,7 @@
                        FontAttributes="Bold"
                        TextColor="#2B2D42" />
 
-                <Grid ColumnSpacing="12" RowSpacing="12" x:Name="Data_Stats">
+                <Grid ColumnSpacing="12" RowSpacing="12" x:Name="Data_Stats" x:DataType="vm:HomeStatsModel">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -55,14 +56,7 @@
                         </VerticalStackLayout>
                     </Frame>
 
-                    <Frame Grid.Row="2" Grid.Column="0" CornerRadius="16" HasShadow="True" BackgroundColor="#FFF1F2">
-                        <VerticalStackLayout>
-                            <Label Text="Debt" FontSize="14" TextColor="#B00020" />
-                            <Label Text="{Binding F_DebtAmount}" FontSize="20" FontAttributes="Bold" TextColor="#B00020"/>
-                        </VerticalStackLayout>
-                    </Frame>
-
-                    <Frame Grid.Row="2" Grid.Column="2" CornerRadius="16" HasShadow="True" BackgroundColor="#EDF7ED">
+                    <Frame Grid.Row="2" Grid.Column="0" CornerRadius="16" HasShadow="True" BackgroundColor="#EDF7ED" Grid.ColumnSpan="2">
                         <VerticalStackLayout>
                             <Label Text="Total" FontSize="14" TextColor="#2E7D32" />
                             <Label Text="{Binding F_TotalAmount}" FontSize="20" FontAttributes="Bold" TextColor="#2E7D32"/>
@@ -70,11 +64,15 @@
                     </Frame>
                 </Grid>
 
-                <Frame CornerRadius="18" HasShadow="True" BackgroundColor="White">
+                <Frame CornerRadius="18" HasShadow="True" BackgroundColor="White" x:Name="Data_Milestone" x:DataType="vm:HomeMilestoneModel">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer
+            Tapped="TapGestureRecognizer_Tapped_1" />
+                    </Frame.GestureRecognizers>
                     <VerticalStackLayout>
-                        <Label Text="Saving Milestone" FontAttributes="Bold" FontSize="18" />
-                        <ProgressBar Progress="0.65" HeightRequest="10" />
-                        <Label Text="65% towards Rp 20,000,000" FontSize="13" TextColor="#8D99AE" />
+                        <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18" />
+                        <ProgressBar Progress="{Binding Percent}" HeightRequest="10" />
+                        <Label Text="{Binding F_Description}" FontSize="13" TextColor="#8D99AE" />
                     </VerticalStackLayout>
                 </Frame>
 
@@ -87,13 +85,13 @@
                                 <VerticalStackLayout Spacing="12">
                                     <Grid ColumnDefinitions="*,Auto">
                                         <VerticalStackLayout>
-                                            <Label Text="{Binding F_Account}" FontAttributes="Bold" />
-                                            <Label FontSize="12" TextColor="#8D99AE" Text="{Binding F_Notes}"/>
+                                            <Label Text="{Binding F_Notes}" FontAttributes="Bold" />
+                                            <Label FontSize="12" TextColor="#8D99AE" Text="{Binding F_Account}"/>
 
                                             <Label Text="{Binding F_CreatedAt}" FontSize="12" TextColor="#8D99AE"/>
                                         </VerticalStackLayout>
 
-                                        <Label Grid.Column="1" Text="{Binding F_Amount}" />
+                                        <Label Grid.Column="1" Text="{Binding F_Amount}" TextColor="{Binding StatusColor}"/>
                                     </Grid>
 
                                     <BoxView HeightRequest="1" BackgroundColor="#EEEEEE" />

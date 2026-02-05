@@ -1,4 +1,6 @@
-﻿using Android.Widget;
+﻿#if ANDROID
+using Android.Widget;
+#endif
 using CashGwejh.Models;
 using CashGwejh.Utils;
 namespace CashGwejh.Page;
@@ -21,7 +23,9 @@ public partial class ManagePage : ContentPage
         }
         catch (Exception ex)
         {
+#if ANDROID
             Toast.MakeText(Android.App.Application.Context, ex.Message, ToastLength.Long).Show();
+#endif
         }
     }
 
@@ -64,12 +68,14 @@ public partial class ManagePage : ContentPage
             if (oldIndex != i)
                 list.Move(oldIndex, i);
         }
+#if ANDROID
 
         Toast.MakeText(Android.App.Application.Context, "Transaction Saved", ToastLength.Short).Show();
-
+#endif
         Dispatcher.Dispatch(async () =>
         {
             await SaveData.SaveTransaction();
+            StaticBinding.MilestoneStats.UpdateAmount();
             StaticBinding.HomeStats.SyncWithTransaction();
             btn.IsEnabled = true;
             IsUpdate = false;
@@ -87,8 +93,10 @@ public partial class ManagePage : ContentPage
         var list = StaticBinding.TransactionsList;
         var existing = list.FirstOrDefault(x => x.Id == vm.Id);
         list.Remove(existing);
-        Toast.MakeText(Android.App.Application.Context, "Transaction Deleted", ToastLength.Short).Show();
+#if ANDROID
 
+        Toast.MakeText(Android.App.Application.Context, "Transaction Deleted", ToastLength.Short).Show();
+#endif
         Dispatcher.Dispatch(async () =>
         {
             await SaveData.SaveTransaction();

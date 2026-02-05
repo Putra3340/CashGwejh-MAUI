@@ -1,7 +1,10 @@
-﻿using Android.Widget;
+﻿#if  ANDROID
+using Android.Widget;
+#endif
 using CashGwejh.Models;
 using CashGwejh.Page;
 using CashGwejh.Utils;
+using System.Threading.Tasks;
 
 namespace CashGwejh
 {
@@ -18,11 +21,13 @@ namespace CashGwejh
         private void MainPage_Loaded(object? sender, EventArgs e)
         {
             SaveData.LoadTransaction();
-
+            SaveData.LoadMilestone();
             Data_Stats.BindingContext = StaticBinding.HomeStats;
             Data_Trx.ItemsSource = StaticBinding.TransactionsList;
+            Data_Milestone.BindingContext = StaticBinding.MilestoneStats;
 
             StaticBinding.HomeStats.SyncWithTransaction();
+            StaticBinding.MilestoneStats.UpdateAmount();
         }
 
         private async void FloatingButton_Clicked(object sender, EventArgs e)
@@ -52,6 +57,11 @@ namespace CashGwejh
 );
 
 
+        }
+
+        private async void TapGestureRecognizer_Tapped_1(object sender, TappedEventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(MilestonePage));
         }
     }
 }

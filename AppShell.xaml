@@ -9,10 +9,12 @@
 
     <ShellContent
         Title="CashGwejh"
+        Icon="icon_home.png"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
     <ShellContent
         Title="Settings"
+        Icon="icon_settings.png"
         ContentTemplate="{DataTemplate page:SettingsPage}"
         Route="SettingsPage" />
 </Shell>

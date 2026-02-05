@@ -7,7 +7,7 @@
         <VerticalStackLayout Padding="20" Spacing="24">
 
             <!-- Appearance -->
-            <VerticalStackLayout Spacing="8">
+            <VerticalStackLayout Spacing="8" IsVisible="False">
                 <Label Text="Appearance"
                        FontSize="16"
                        FontAttributes="Bold"/>
@@ -22,7 +22,7 @@
             </VerticalStackLayout>
 
             <!-- Currency -->
-            <VerticalStackLayout Spacing="8">
+            <VerticalStackLayout Spacing="8" IsVisible="False">
                 <Label Text="Default Currency"
                        FontSize="16"
                        FontAttributes="Bold"/>
@@ -37,7 +37,7 @@
             </VerticalStackLayout>
 
             <!-- Notifications -->
-            <VerticalStackLayout Spacing="8">
+            <VerticalStackLayout Spacing="8" IsVisible="False">
                 <Label Text="Notifications"
                        FontSize="16"
                        FontAttributes="Bold"/>
